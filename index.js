@@ -1,4 +1,4 @@
-d3.select('h1').style('color', 'blue');
+d3.select('h1').style('color', '#95360A');
 
 var svgWidth = 500, svgHeight = 500;
 var svg = d3.select("svg")
@@ -10,4 +10,4 @@ var circle = svg.append("circle")
     .attr("cx", 250)
     .attr("cy", 250)
     .attr("r", 250)
-    .attr("fill", "#7CE8D5");
+    .attr("fill", "#0F5B84");
