@@ -1,4 +1,4 @@
-d3.select('h1').style('color', 'red');
+d3.select('h1').style('color', 'blue');
 
 var svgWidth = 500, svgHeight = 500;
 var svg = d3.select("svg")
