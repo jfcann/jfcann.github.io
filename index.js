@@ -1,8 +1,3 @@
-/*d3.select('h1').style('color', '#95360A')
-               .style('font-family': 'monospace')
-               .style('font-color': '#95360A')
-               .style('transform': translate(100, 100))*/
-
 var svgWidth = 500, svgHeight = 500;
 var svg = d3.select("svg")
     .attr("width", svgWidth)
@@ -16,7 +11,7 @@ var circle = svg.append("circle")
     .attr("fill", "#0F5B84");
 
 var user = svg.append("text")
-    .text("jfcann)
+    .text("jfcann")
     .attr("font-family", "monaco")
     .attr("y", 250)
     .attr("x", 250)
