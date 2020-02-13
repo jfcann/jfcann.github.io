@@ -10,9 +10,12 @@ var circle = svg.append("circle")
     .attr("r", 250)
     .attr("fill", "#0F5B84");
 
-var user = svg.append("text")
+var user = svg.selectAll("text")
+    .enter()
+    .append("text")
     .text("jfcann")
-    .attr("font-family", "monaco")
     .attr("y", 250)
     .attr("x", 250)
     .attr("fill", "#95360A");
+
+/*.attr("font-family", "monaco")*/
