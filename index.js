@@ -1,21 +1,27 @@
-var svgWidth = 500, svgHeight = 500;
-var svg = d3.select("svg")
-    .attr("width", svgWidth)
-    .attr("height", svgHeight)
-    .attr("class", "svg-container")
 
-var circle = svg.append("circle")
-    .attr("cx", 250)
-    .attr("cy", 250)
-    .attr("r", 250)
-    .attr("fill", "#0F5B84");
+function makeJava() {
+  var ds1 = [["1", 1], ["2", 4], ["3", 2]];
+  var ds2 = [["1", 5], ["3", 3]];
 
-var user = svg.selectAll("text")
-    .enter()
-    .append("text")
-    .text("jfcann")
-    .attr("y", 250)
-    .attr("x", 250)
-    .attr("fill", "#95360A");
+  var scX = d3.scaleLinear().domain([0, 6]).range([50, 300]),
+    scY = d3.scaleLinear().domain([0, 3]).range([50, 150]);
 
-/*.attr("font-family", "monaco")*/
+  var j = -1, k = -1;
+
+  var svg = d3.select("#key");
+
+  svg.selectAll("text").data(ds1).enter().append("text")
+    .attr("x", 20).attr("y", d=>scY(++j)).text(d=>d[0]);
+
+  svg.selectAll("circle").data(ds1).enter().append("circle")
+    .attr("r", 5).attr("fill", "red")
+    .attr("cx", d=>scX(d[1])).attr("cy", d=>scY(++k)-5);
+
+  svg.on("click", function() {
+    var cs = svg.selectAll("circle").data(ds2, d=>d[0]);
+
+    cs.transition().duration(1000).attr("cx", d=>scX(d[1]));
+    cs.exit().attr("fill", "blue");
+  });
+
+}
