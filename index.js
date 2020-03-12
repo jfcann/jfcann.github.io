@@ -1,27 +1,36 @@
 
-function makeJava() {
-  var ds1 = [["1", 1], ["2", 4], ["3", 2]];
-  var ds2 = [["1", 5], ["3", 3]];
+function makeUpdate() {
+  var ds1 = [[0.62, 0.78, "#5EB700"], [-0.22, 0.97, "#474747"], [-0.90, 0.43, "#262476"], [-0.90, -0.43, "#ff5300"],
+             [-0.22, -0.97, "#900C3F"], [0.62, -0.78, "#00A5A7"], [1, 0, "#6a0585"]];
 
-  var scX = d3.scaleLinear().domain([0, 6]).range([50, 300]),
-    scY = d3.scaleLinear().domain([0, 3]).range([50, 150]);
+  var ds2 = [[0.90, 0.43 , "#00A5A7"], [0.22, 0.97, "#6a0585"], [-0.62, 0.78 , "#5EB700" ], [-1, 0, "#474747"],
+             [-0.62, -0.78, "#262476"], [0.22, -0.97, "#ff5300"], [ 0.90, -0.43, "#900C3F"]];
 
-  var j = -1, k = -1;
+  var ds3 = [[0.90, 0.43 , "#ff5300"], [0.22, 0.97, "#900C3F"], [-0.62, 0.78 , "#00A5A7"], [-1, 0, "#6a0585"],
+             [-0.62, -0.78, "#5EB700"], [0.22, -0.97, "#474747"], [ 0.90, -0.43, "#262476"]];
 
-  var svg = d3.select("#key");
+  var ds4 = [[0.62, 0.78, "#ff5300"], [-0.22, 0.97, "#900C3F"], [-0.90, 0.43, "#00A5A7"], [-0.90, -0.43, "#6a0585"],
+             [-0.22, -0.97, "#5EB700"], [0.62, -0.78, "#474747"], [1, 0, "#262476"]];
 
-  svg.selectAll("text").data(ds1).enter().append("text")
-    .attr("x", 20).attr("y", d=>scY(++j)).text(d=>d[0]);
+  var scX = d3.scaleLinear().domain([-1.5, 1.5]).range([50, 250]),
+      scY = d3.scaleLinear().domain([-1.5, 1.5]).range([50, 250]);
 
-  svg.selectAll("circle").data(ds1).enter().append("circle")
-    .attr("r", 5).attr("fill", "red")
-    .attr("cx", d=>scX(d[1])).attr("cy", d=>scY(++k)-5);
+  var svg = d3.select("#update");
 
   svg.on("click", function() {
-    var cs = svg.selectAll("circle").data(ds2, d=>d[0]);
+    [ds4, ds1, ds2, ds3] = [ds1, ds2, ds3, ds4];
 
-    cs.transition().duration(1000).attr("cx", d=>scX(d[1]));
-    cs.exit().attr("fill", "blue");
-  });
+    var cs = svg.selectAll("circle").data(ds1, d=>d[2]);
 
+    cs.exit().remove();
+
+    cs = cs.enter().append("circle")
+      .attr("r", 7).attr("fill", d=>d[2])
+      .merge(cs);
+
+    cs.transition().duration(1000)
+      .attr("cx", d=>scX(d[0])).attr("cy", d=>scY(d[1]));
+  } );
+
+  //svg.dispatch("click");
 }
