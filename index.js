@@ -17,6 +17,7 @@ function makeUpdate() {
 
   var svg = d3.select("#update");
 
+
   svg.on("click", function() {
     [ds4, ds1, ds2, ds3] = [ds1, ds2, ds3, ds4];
 
@@ -29,7 +30,13 @@ function makeUpdate() {
       .merge(cs);
 
     cs.transition().duration(1000)
-      .attr("cx", d=>scX(d[0])).attr("cy", d=>scY(d[1]));
+      .attr("cx", d=>scX(d[0])).attr("cy", d=>scY(d[1])).attr("fill", "black")
+      .transition().duration(1000).attr("fill", d=>d[2]);
+
+
+    //cs.transition().duration(1000)
+    //
+
   } );
 
   //svg.dispatch("click");
